@@ -1,0 +1,62 @@
+#!/usr/bin/python
+# encoding:utf-8
+__author__ = 'xyc'
+
+import logging
+import events
+from utils import ImportCLS
+from urllib2 import urlopen, URLError, HTTPError
+
+class Monitor(object):
+    """
+    监控url，并触发后续任务
+    """
+
+    def __init__(self, notication, timeout):
+        self.failed = set()
+        self.timeout = timeout
+        self.get_req_fire(notication)
+
+    def get_req_fire(self, notication):
+        for n in notication:
+            cls = ImportCLS.get_cls(n)
+            events.request_success += cls.recover
+            events.request_fail += cls.alert
+
+    def set_url_failed(self, url, code):
+        self.failed.add((url, code))
+
+    def recover(self, url, code):
+        self.failed.remove((url, code))
+        events.request_success.fire(url)
+
+    def alert(self, url, expected_code, code):
+        logging.info("CHECK %s FAILED!" % url)
+        logging.info("START TO SEND ALERT")
+        events.request_fail.fire(url=url, expected_code=expected_code, code=code)
+
+    def check_url(self, url):
+        try:
+            code = urlopen(url, timeout=self.timeout).getcode()
+            logging.debug("RETURNED %d" % code)
+            return code
+        except HTTPError, e:
+            logging.error(e)
+            return e.getcode()
+        except URLError, e:
+            logging.error(e)
+        return None
+
+    def check(self, check_urls):
+        for url, expected_code in check_urls:
+            logging.debug("CHECKING %s whit code %d" % (url, expected_code))
+            code = self.check_url(url)
+            if not code or code != expected_code:
+                if not self.set_url_failed(url, expected_code):
+                    self.alert(url, expected_code, code)
+                self.set_url_failed(url, code)
+            else:
+                if self.set_url_failed(url, expected_code):
+                    self.recover(url, code)
+                logging.info("%s is running !", url)
+
