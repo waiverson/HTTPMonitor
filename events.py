@@ -30,3 +30,5 @@ class EventHook(object):
 request_success = EventHook()
 
 request_fail = EventHook()
+
+service_handler = EventHook()

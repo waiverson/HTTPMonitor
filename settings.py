@@ -2,21 +2,22 @@
 # encoding:utf-8
 __author__ = 'xyc'
 
-CHECK_URL = (('http://user.52desk2.com', 200),
-             ('http://admin.51desk.com', 200),
-             ('http://www.51desk.com', 200),
-             ('http://52.74.107.193:16001', 200),
-             ('http://52.74.107.193:16002', 200),
-             ('http://52.74.107.193:16003', 200),
-             ('http://52.74.107.193:16004', 200),
-             ('http://52.74.107.193:16005', 200))
+CHECK_URL = (('http://user.54desk.com', 200, "userportal"),
+             ('http://admin.51desk.com', 200, "adminportal"),
+             ('http://www.51desk.com', 200, ""),
+             ('http://52.74.107.193:16001', 200, "mobileserver"),
+             ('http://52.74.107.193:16002', 200, "jobserver"),
+             ('http://52.74.107.193:16003', 200, "connector"),
+             ('http://52.74.107.193:16004', 200), "acs")
+
+SERVICEHOST = ('52.74.107.193', 'root', '51deskserver.pem')
 
 TIMEOUT = 5
 
 CHECK_INTERVAL = 120
 
 NOTICATION = ('notication.ConsoleNotication', 'notication.MailNotication')
-HANDLER = ('FX_Monitor.handler',)
+HANDLER = ('handler.DockerHandler',)
 
 # CALLBACK_URL = ()
 

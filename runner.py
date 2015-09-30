@@ -18,7 +18,7 @@ def main():
     check_inv = getattr(settings, "CHECK_INTERVAL", DEFAULT_INTERVAL)
     # callback_url = getattr(settings, "CALLBACK_URL", None)
 
-    monitor = Monitor(settings.NOTICATION, timeout)
+    monitor = Monitor(settings.NOTICATION, settings.HANDLER, timeout)
 
     try:
         while True:
