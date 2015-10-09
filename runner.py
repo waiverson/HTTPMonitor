@@ -12,7 +12,7 @@ DEFAULT_INTERVAL = 120
 
 def main():
     logging.basicConfig(level=logging.INFO,
-                        format="%(asctime)s %(levelname)s MODULE:%(module)s LineNO:%(lineno)d %(message)s",
+                        format="%(asctime)s %(levelname)s  MODULE:%(module)s LineNO:%(lineno)d %(message)s",
                         stream=sys.stdout)
     timeout = getattr(settings, "TIMEOUT", DEFAULT_TIMEOUT)
     check_inv = getattr(settings, "CHECK_INTERVAL", DEFAULT_INTERVAL)
