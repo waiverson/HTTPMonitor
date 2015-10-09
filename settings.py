@@ -8,7 +8,7 @@ CHECK_URL = (('http://user.54desk.com', 200, "userportal"),
              ('http://52.74.107.193:16001', 200, "mobileserver"),
              ('http://52.74.107.193:16002', 200, "jobserver"),
              ('http://52.74.107.193:16003', 200, "connector"),
-             ('http://52.74.107.193:16004', 200), "acs")
+             ('http://52.74.107.193:16004', 200, "acs"))
 
 SERVICEHOST = ('52.74.107.193', 'root', '51deskserver.pem')
 
@@ -27,7 +27,7 @@ EMAIL_HOST = 'smtp.mxhichina.com'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'poster@51desk.com'
 DEFAULT_FROM_EMAIL = 'poster@51desk.com'
-EMAIL_HOST_PASSWORD = 'Abc123456'
+EMAIL_HOST_PASSWORD = 'faxiang@123'
 EMAIL_USE_TLS = False
 
 RECIPIENTS = ['tom.xiong@51desk.com']
