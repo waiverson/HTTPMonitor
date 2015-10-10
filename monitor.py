@@ -32,14 +32,18 @@ class Monitor(object):
     def set_url_failed(self, url, code):
         self.failed.add((url, code))
 
+    def get_url_failed(self, url, code):
+        return (url, code) in self.failed
+
     def recover(self, url, code):
         self.failed.remove((url, code))
-        events.request_success.fire(url)
+        events.request_success.fire(url=url)
 
     def alert(self, url, expected_code, code, service_name):
         logging.info("CHECK %s FAILED!" % url)
-        logging.info("START TO SEND ALERT")
+        logging.info("**START TO SEND ALERT**")
         events.request_fail.fire(url=url, expected_code=expected_code, code=code)
+        logging.info("**START TO HANDLE EXCEPTION**")
         events.service_handler.fire(service_name=service_name)
 
     def check_url(self, url):
@@ -59,11 +63,11 @@ class Monitor(object):
             logging.debug("CHECKING %s whit code %d" % (url, expected_code))
             code = self.check_url(url)
             if not code or code != expected_code:
-                if not self.set_url_failed(url, expected_code):
+                if not self.get_url_failed(url, expected_code):
                     self.alert(url, expected_code, code, service_name)
-                self.set_url_failed(url, code)
+                    self.set_url_failed(url, expected_code)
             else:
-                if self.set_url_failed(url, expected_code):
+                if self.get_url_failed(url, expected_code):
                     self.recover(url, code)
                 logging.info("%s is running !", url)
 

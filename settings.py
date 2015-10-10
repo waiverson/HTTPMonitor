@@ -14,7 +14,7 @@ SERVICEHOST = ('52.74.107.193', 'root', '51deskserver.pem')
 
 TIMEOUT = 5
 
-CHECK_INTERVAL = 120
+CHECK_INTERVAL = 10
 
 NOTICATION = ('notication.ConsoleNotication', 'notication.MailNotication')
 HANDLER = ('handler.DockerHandler',)
