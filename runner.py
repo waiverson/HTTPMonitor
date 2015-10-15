@@ -22,7 +22,7 @@ def main():
 
     try:
         while True:
-            monitor.check(settings.CHECK_URL)
+            monitor.check(settings.CHECK_URL, settings.RETRY_COUNT)
             time.sleep(check_inv)
     except KeyboardInterrupt:
         pass

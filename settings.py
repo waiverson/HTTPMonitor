@@ -12,9 +12,11 @@ CHECK_URL = (('http://user.51desk.com', 200, "userportal"),
 
 SERVICEHOST = ('52.74.107.193', 'root', '51deskserver.pem')
 
-TIMEOUT = 5
+TIMEOUT = 10
 
 CHECK_INTERVAL = 10
+
+RETRY_COUNT = 3
 
 NOTICATION = ('notication.ConsoleNotication', 'notication.MailNotication')
 HANDLER = ('handler.DockerHandler',)

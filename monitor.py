@@ -2,7 +2,7 @@
 # encoding:utf-8
 __author__ = 'xyc'
 
-import logging
+import logging,time
 import events
 from utils import ImportCLS
 from urllib2 import urlopen, URLError, HTTPError
@@ -58,10 +58,18 @@ class Monitor(object):
             logging.error(e)
         return None
 
-    def check(self, check_urls):
+    def check(self, check_urls, num):
         for url, expected_code, service_name in check_urls:
             logging.debug("CHECKING %s whit code %d" % (url, expected_code))
-            code = self.check_url(url)
+            # 如果失败，20s重试1次，重试3次
+            for i in range(num):
+                code = self.check_url(url)
+                if not code or code != expected_code:
+                    time.sleep(20)
+                    logging.info("%s is not running!, retry check for %d" % (url, i+1))
+                    continue
+                else:
+                    break
             if not code or code != expected_code:
                 if not self.get_url_failed(url, expected_code):
                     self.alert(url, expected_code, code, service_name)
