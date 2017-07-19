@@ -2,15 +2,15 @@
 # encoding:utf-8
 __author__ = 'xyc'
 
-CHECK_URL = (('http://user.51desk.com', 200, "userportal"),
-             ('http://admin.51desk.com', 200, "adminportal"),
-             ('http://www.51desk.com', 200, ""),
-             ('http://52.74.107.193:16001', 200, "mobileserver"),
-             ('http://52.74.107.193:16002', 200, "jobserver"),
-             ('http://52.74.107.193:16003', 200, "connector"),
-             ('http://52.74.107.193:16004/WEBAPI/acs/data/analysis/satisfaction', 200, "acs"))
+CHECK_URL = (('http://user.xxx.com', 200, "xxx"),
+             ('http://admin.xxx.com', 200, "xxx"),
+             ('http://www.xxx.com', 200, "xxx"),
+             ('http://xxx', 200, "xxx"),
+             ('http://xxx', 200, "xxx"),
+             ('http://xxx', 200, "xxx"),
+             ('http://xxx', 200, "xxx"))
 
-SERVICEHOST = ('52.74.107.193', 'root', '51deskserver.pem')
+SERVICEHOST = ('10.10.10.10', 'root', 'xxx.pem')
 
 TIMEOUT = 10
 
@@ -25,11 +25,11 @@ HANDLER = ('handler.DockerHandler',)
 
 # WEBUI = ''
 
-EMAIL_HOST = 'smtp.mxhichina.com'
+EMAIL_HOST = 'smtp.xxx.com'
 EMAIL_PORT = '25'
-EMAIL_HOST_USER = 'poster@51desk.com'
-DEFAULT_FROM_EMAIL = 'poster@51desk.com'
-EMAIL_HOST_PASSWORD = 'faxiang@123'
+EMAIL_HOST_USER = 'xx@xxx.com'
+DEFAULT_FROM_EMAIL = 'xx@xxx.com'
+EMAIL_HOST_PASSWORD = 'xxx@123'
 EMAIL_USE_TLS = False
 
-RECIPIENTS = ['tom.xiong@51desk.com']
+RECIPIENTS = ['xx.xx@xxx.com']
